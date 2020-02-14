@@ -1,0 +1,90 @@
+set number " show line numbers
+set showcmd " show keystroke
+set incsearch " Shows the match while typing
+set hlsearch " Highlight found searches
+
+let mapleader = ","
+inoremap jj <Esc>
+inoremap <leader>w <Esc>:w<cr>
+noremap <leader>w :w<cr>
+
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'preservim/nerdtree'
+Plug 'dense-analysis/ale'
+Plug 'preservim/nerdcommenter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+call plug#end()
+
+
+"--------- python-mode plug setting ----------
+let g:pymode = 1
+let g:pymode_options_max_line_length = 120
+let g:pymode_python = 'python3'
+let g:pymode_indent = 1
+let g:pymode_doc = 1
+let g:pymode_doc_bind = 'K'
+
+let g:pymode_lint = 0
+let g:pymode_virtualenv = 1
+let g:pymode_virtualenv_path = $VIRTUAL_ENV
+let g:pymode_run = 1
+let g:pymode_run_bind = '<leader>r'
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_rope_completion = 1
+let g:pymode_rope_goto_definition_bind = '<C-]>'
+let g:pymode_rope_rename_bind = '<C-c>rr'
+let g:pymode_lint_comment_symbol = 'CC'
+
+
+" ---------- nerdtree plug setting ----------
+map <C-n> :NERDTreeToggle<CR>
+
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+
+
+
+let g:NERDTreeWinSize = 25 "设定 NERDTree 视窗大小
+let NERDTreeIgnore = ['\.pyc$']  " 过滤所有.pyc文件不显示
+let g:NERDTreeHidden=0     "不显示隐藏文件
+"Making it prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+" ---------- nerdtree-git-plugin plug setting ----------
+let g:NERDTreeIndicatorMapCustom = { 
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "✭",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "═",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ 'Ignored'   : '☒',
+            \ "Unknown"   : "?"
+        \ }
+
+
+
+
+
+
+
+" ---------- ale plug setting ----------
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'python': ['flake8', 'pep8']}
+let g:ale_lint_on_enter = 1
+let g:ale_linters = {'python': ['pylint']}
+
+
+" ---------- nerdcommanter plug setting ----------
+map -- <Leader>c<Space>
+imap -- <Esc><Leader>c<Space>i
+
+
